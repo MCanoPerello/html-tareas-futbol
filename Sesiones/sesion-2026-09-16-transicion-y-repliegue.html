@@ -1,0 +1,569 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transición y repliegue del bloque · 16/09/2026</title>
+<style>
+:root{
+  --ink:#16202E;
+  --ink-2:#4A5766;
+  --ink-3:#7D8894;
+  --paper:#FFFFFF;
+  --rule:#DDE2E8;
+  --navy:#1B3A5C;
+  --red:#C8102E;
+  --gold:#F0B323;
+  --turf:#E8EFE9;
+  --turf-line:#B4C9B8;
+  --att:#D94F3D;
+  --def:#1D7A8C;
+  --ball:#F0B323;
+  --neutral:#8E99A4;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px 64px}
+
+header.top{
+  background:var(--navy);
+  color:#fff;
+  margin:0 -20px 0;
+  padding:28px 20px 22px;
+  border-bottom:5px solid var(--gold);
+}
+.crest{
+  display:inline-block;font-size:12px;letter-spacing:.14em;
+  color:var(--gold);margin:0 0 10px;
+}
+h1{
+  margin:0 0 4px;font-size:30px;line-height:1.1;
+  font-weight:700;letter-spacing:-.02em;
+}
+.sub{margin:0;color:#B9C7D6;font-size:15px}
+.meta{
+  display:flex;flex-wrap:wrap;gap:6px 22px;
+  margin:18px 0 0;padding:0;list-style:none;
+  font-size:14px;color:#D3DDE7;
+}
+.meta b{color:#fff;font-weight:600}
+
+.aims{border-bottom:1px solid var(--rule);padding:24px 0}
+.aim{display:flex;gap:14px;padding:7px 0}
+.aim .k{
+  flex:0 0 96px;font-size:13px;color:var(--ink-3);
+  padding-top:3px;
+}
+.aim .v{flex:1;font-size:17px;font-weight:600;line-height:1.35}
+.norm{
+  margin:16px 0 0;padding:14px 16px;
+  background:var(--turf);border-left:4px solid var(--navy);
+  font-size:17px;font-weight:600;
+}
+.norm span{display:block;font-size:13px;font-weight:400;color:var(--ink-2);margin-bottom:3px}
+
+.squad{padding:20px 0;border-bottom:1px solid var(--rule);font-size:14px;color:var(--ink-2)}
+.squad h2{font-size:13px;color:var(--ink-3);font-weight:400;margin:0 0 8px}
+.squad p{margin:0 0 10px;display:flex;gap:14px}
+.squad b{color:var(--ink);font-weight:600;flex:0 0 96px}
+.squad span{flex:1}
+
+section.blk{border-bottom:1px solid var(--rule);padding:30px 0}
+.hd{display:flex;align-items:baseline;gap:14px;margin:0 0 4px}
+.clock{
+  flex:0 0 auto;font-size:15px;font-weight:700;color:var(--red);
+  min-width:52px;
+}
+.hd h2{margin:0;font-size:23px;line-height:1.2;font-weight:700;letter-spacing:-.01em;flex:1}
+.dur{flex:0 0 auto;font-size:14px;color:var(--ink-3)}
+.kind{margin:0 0 16px 66px;font-size:13px;color:var(--ink-3)}
+
+.stage{margin:18px 0 0;background:var(--turf);border-radius:6px;padding:10px 10px 4px}
+.stage svg{display:block;width:100%;height:auto}
+.ctr{display:flex;align-items:center;gap:10px;padding:8px 2px 10px;flex-wrap:wrap}
+button{
+  font:inherit;font-size:15px;font-weight:600;
+  background:var(--navy);color:#fff;border:0;border-radius:4px;
+  padding:9px 18px;cursor:pointer;min-height:42px;
+}
+button.ghost{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.key{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-2);margin-left:auto}
+.key i{width:11px;height:11px;border-radius:50%;display:inline-block;vertical-align:-1px;margin-right:5px}
+
+.rows{margin:20px 0 0}
+.row{display:flex;gap:14px;padding:11px 0;border-top:1px solid var(--rule)}
+.row .k{flex:0 0 96px;font-size:13px;color:var(--ink-3);padding-top:2px}
+.row .v{flex:1;min-width:0}
+.row p{margin:0}
+.row ul{margin:0;padding-left:19px}
+.row li{margin:0 0 5px}
+.say{font-weight:600}
+.say:before{content:"“"}
+.say:after{content:"”"}
+
+.talk{background:var(--turf);border-radius:6px;padding:18px 20px;margin:16px 0 0}
+.talk ol{margin:0;padding-left:20px}
+.talk li{margin:0 0 9px}
+.talk li:last-child{margin:0}
+
+footer{padding:28px 0 0;font-size:13px;color:var(--ink-3)}
+
+@media (max-width:560px){
+  h1{font-size:25px}
+  .hd h2{font-size:20px}
+  .aim .k,.row .k,.squad b{flex-basis:74px;font-size:12px}
+  .squad{font-size:13px}
+  .kind{margin-left:0}
+  .clock{min-width:46px;font-size:14px}
+}
+@media print{
+  .ctr{display:none}
+  section.blk{page-break-inside:avoid}
+  header.top{background:none;color:var(--ink);border-bottom:3px solid var(--ink)}
+  .crest,.sub,.meta{color:var(--ink-2)}
+  .meta b{color:var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){
+  .stage{scroll-behavior:auto}
+}
+
+.steplbl{font-size:15px;font-weight:600;color:var(--ink);padding:2px 4px 8px}
+@media print{.steplbl{display:none}}
+</style>
+<div class="wrap">
+
+<header class="top">
+  <div class="crest">Margaritense Atlètic · Alevín</div>
+  <h1>Transición y repliegue del bloque</h1>
+  <p class="sub">Microciclo 2 · Sesión 2 de 3</p>
+  <ul class="meta">
+    <li>Miércoles <b>16/09/2026</b></li>
+    <li>Inicio <b>18:00</b></li>
+    <li>Duración <b>90 min</b></li>
+    <li>Jugadores <b>14</b></li>
+    <li>Campo <b>medio campo F7</b></li>
+  </ul>
+</header>
+
+<div class="aims">
+  <div class="aim"><div class="k">Semana</div><div class="v">Organización sin balón: ocupar espacios y replegar ordenado</div></div>
+  <div class="aim"><div class="k">Sesión</div><div class="v">Repliegue y transición defensiva. Cuando el balón cambia de zona o de dueño, el bloque se mueve entero</div></div>
+  <div class="norm"><span>La norma de la semana</span>Cuando perdemos el balón, los carrileros bajan al lado del central</div>
+</div>
+
+<div class="squad">
+  <h2>Convocados</h2>
+  <p><b>Portería</b><span>Brahim Z.</span></p>
+  <p><b>Defensa</b><span>Toni R. · Pascual T. · Miguel Ángel M. · Brun B.</span></p>
+  <p><b>Centro campo</b><span>Toni E. · Marc M. · Miquel R. · Guillem C. · Mateu R. · Amir A.</span></p>
+  <p><b>Ataque</b><span>Noel W. · Miguel T. · Lucas B.</span></p>
+</div>
+
+<section class="blk">
+  <div class="hd"><div class="clock">18:00</div><h2>Charla inicial</h2><div class="dur">5 min</div></div>
+  <p class="kind">Trabajo previo a campo</p>
+  <div class="talk">
+    <ol>
+      <li>Repasar el lunes: ya sabemos que uno va y el otro cubre, hoy toca moverse todos a la vez.</li>
+      <li>Explicar el objetivo de la sesión: cuando el balón cambia de zona o de dueño, el bloque entero se mueve.</li>
+      <li>Decir qué queremos ver distinto el sábado: que no nos cojan nunca en la contra después de atacar.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="blk" data-scene="duelo">
+  <div class="hd"><div class="clock">18:05</div><h2>Duelo 1v1 entre picas</h2><div class="dur">10 min</div></div>
+  <p class="kind">Juego adaptado</p>
+
+  <div class="stage">
+    <svg viewBox="0 0 400 440" role="img" aria-label="Dos picas enfrentadas con el balón en el centro. Cada jugador sale de detrás de su pica, corre a la contraria, la rodea y vuelve al balón. El que llega antes ataca la portería de su propio fondo.">
+      <rect x="100" y="70" width="200" height="300" rx="3" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <rect x="115" y="63" width="50" height="7" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <rect x="235" y="370" width="50" height="7" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <g stroke="var(--ink-2)" stroke-width="3" stroke-linecap="round" fill="var(--ink-2)">
+        <line x1="200" y1="112" x2="200" y2="134"/><circle cx="200" cy="110" r="3.5" stroke="none"/>
+        <line x1="200" y1="306" x2="200" y2="328"/><circle cx="200" cy="330" r="3.5" stroke="none"/>
+      </g>
+      <g fill="var(--att)"><circle cx="162" cy="36" r="11"/><circle cx="238" cy="36" r="11"/></g>
+      <g fill="var(--def)"><circle cx="162" cy="404" r="11"/><circle cx="238" cy="404" r="11"/></g>
+      <g data-a="du-a"><circle r="12" fill="var(--att)"/></g>
+      <g data-a="du-b"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="du-ball"><circle r="6" fill="var(--ball)" stroke="#8A6410" stroke-width="1"/></g>
+    </svg>
+  </div>
+  <div class="ctr">
+    <button data-play="duelo">Ver la jugada</button>
+    <button class="ghost" data-reset="duelo">Reiniciar</button>
+    <div class="key"><span><i style="background:var(--att)"></i>equipo A</span><span><i style="background:var(--def)"></i>equipo B</span><span><i style="background:var(--ball)"></i>balón</span></div>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="k">Descripción</div><div class="v"><p>Dos picas enfrentadas con el balón justo en medio y una fila detrás de cada pica. A la señal sale el primero de cada fila, corre hasta la pica contraria, la rodea para girar y vuelve al balón. El que llega antes ataca la portería de su propio fondo, la que tiene de cara en ese momento; el que llega tarde defiende.</p></div></div>
+    <div class="row"><div class="k">Objetivo</div><div class="v"><p>Defender corriendo hacia atrás, en desventaja y sin tiempo de colocarse.</p></div></div>
+    <div class="row"><div class="k">Normas</div><div class="v"><ul>
+      <li>Salida a la señal, los dos a la vez.</li>
+      <li>Rodear la pica por fuera antes de ir al balón. Quien la recorta, jugada anulada.</li>
+      <li>Desde que el primero toca el balón hay 5 segundos: o marca él, o se lo roban y marcan en la otra portería, o se acaba.</li>
+      <li>Balón fuera, jugada terminada.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Puntuación</div><div class="v"><ul>
+      <li>Gol del que llega primero, 1 punto.</li>
+      <li>Gol del que llega tarde, tras robar, 2 puntos.</li>
+      <li>Se canta en el momento, jugada a jugada, sin acumular marcador.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Consignas</div><div class="v"><ul>
+      <li class="say">Si llegas tarde, no entres de cabeza: retrasa y tápale la portería.</li>
+      <li class="say">Rodea la pica sin frenar.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Material</div><div class="v"><p>Por grupo: 2 picas y balones en el centro. Un grupo juega con miniportería en los dos fondos y el otro con puertas de dos conos.</p></div></div>
+    <div class="row"><div class="k">Variante</div><div class="v"><p>Salida de espaldas al campo o sentados. Iguala a los más lentos y añade un punto de reacción.</p></div></div>
+    <div class="row"><div class="k">Organización</div><div class="v"><p>Dos grupos de 7, cada uno con dos filas de 4 y 3. Duelo cada 8 o 10 segundos, así cada niño entra cada 40 segundos. Los equipos intercambian la portería que atacan a los 5 minutos.</p></div></div>
+  </div>
+</section>
+
+<section class="blk" data-scene="circuito">
+  <div class="hd"><div class="clock">18:15</div><h2>Circuito enlazado</h2><div class="dur">15 min</div></div>
+  <p class="kind">Circuito · día de físico</p>
+
+  <div class="stage">
+    <div class="steplbl" data-lbl="circuito">1. Escalera, sin balón</div>
+    <svg viewBox="0 0 400 460" role="img" aria-label="Circuito continuo: escalera sin balón, pase al apoyo 1 y devolución, giro rodeando la pica, zigzag entre chinos, pase al apoyo 2, devolución y finalización. El carril exterior con vallas y aros marca la vuelta del apoyo 1.">
+      <rect x="160" y="54" width="60" height="8" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <path d="M284 300 L356 296 L356 150 L250 92 L214 66" fill="none" stroke="var(--def)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.55"/>
+      <path d="M160 64 L40 146 L40 300 L58 306" fill="none" stroke="var(--def)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.55"/>
+      <g stroke="var(--ink-2)" stroke-width="2.5" stroke-linecap="round">
+        <line x1="344" y1="292" x2="368" y2="292"/><line x1="344" y1="258" x2="368" y2="258"/>
+      </g>
+      <g fill="none" stroke="var(--ink-2)" stroke-width="2"><circle cx="356" cy="216" r="13"/><circle cx="356" cy="178" r="13"/></g>
+      <g stroke="var(--turf-line)" stroke-width="1.2" fill="none">
+        <rect x="64" y="330" width="40" height="62"/>
+        <line x1="64" y1="345" x2="104" y2="345"/><line x1="64" y1="361" x2="104" y2="361"/><line x1="64" y1="377" x2="104" y2="377"/>
+      </g>
+      <g stroke="var(--ink-2)" stroke-width="2.5" stroke-linecap="round" fill="var(--ink-2)">
+        <line x1="76" y1="190" x2="76" y2="210"/><circle cx="76" cy="188" r="3.5" stroke="none"/>
+      </g>
+      <g fill="none" stroke="var(--neutral)" stroke-width="1.8">
+        <rect x="104" y="180" width="11" height="11" rx="2"/><rect x="124" y="206" width="11" height="11" rx="2"/>
+        <rect x="146" y="180" width="11" height="11" rx="2"/><rect x="168" y="206" width="11" height="11" rx="2"/>
+        <rect x="60" y="300" width="12" height="12" rx="2"/>
+      </g>
+      <g fill="var(--def)"><circle cx="290" cy="300" r="12"/><circle cx="300" cy="180" r="12"/></g>
+      <g fill="var(--att)" opacity=".5"><circle cx="56" cy="414" r="11"/><circle cx="84" cy="414" r="11"/></g>
+      <g data-a="ci-ball"><circle r="6" fill="var(--ball)" stroke="#8A6410" stroke-width="1"/></g>
+      <g data-a="ci-p"><circle r="12" fill="var(--att)"/></g>
+    </svg>
+  </div>
+  <div class="ctr">
+    <button data-play="circuito">Ver el recorrido</button>
+    <button class="ghost" data-reset="circuito">Reiniciar</button>
+    <div class="key"><span><i style="background:var(--att)"></i>jugador</span><span><i style="background:var(--def)"></i>apoyos y carril</span><span><i style="background:var(--neutral)"></i>chinos</span></div>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="k">Descripción</div><div class="v"><p>Recorrido continuo de seis pasos: escalera sin balón, coger el balón del chino y pasar al apoyo 1 saliendo a recibir, devolución, conducción y giro rodeando la pica, zigzag entre los cuatro chinos, y pase al apoyo 2 con devolución y finalización.</p></div></div>
+    <div class="row"><div class="k">El carril de vuelta</div><div class="v"><p>El apoyo 1, en cuanto sirve su devolución, sale por fuera: salta las vallas, bota en los aros, recoge el balón de la miniportería y lo deja en el chino que hay justo después de la escalera, que es donde lo necesita el siguiente. De ahí, al final de la fila.</p></div></div>
+    <div class="row"><div class="k">La rotación</div><div class="v"><ul>
+      <li>El apoyo 1 se va al carril y acaba en la fila.</li>
+      <li>El apoyo 2 baja a ocupar el sitio del apoyo 1.</li>
+      <li>El que finaliza sube a ocupar el sitio del apoyo 2.</li>
+      <li>Cada balón que entra completa una rotación entera sin necesidad de cantarla.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Objetivo</div><div class="v"><p>Trabajo físico y técnico del día: frecuencia de pies, salto, coordinación, conducción y cambio de orientación. Sin contenido táctico, y es a propósito.</p></div></div>
+    <div class="row"><div class="k">Normas</div><div class="v"><ul>
+      <li>La escalera se hace sin balón, un apoyo por cajón.</li>
+      <li>Después de pasar hay que salir a recibir, no quedarse mirando el pase.</li>
+      <li>El apoyo 1 no se salta el carril ni deja el balón en otro sitio.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Consignas</div><div class="v"><ul>
+      <li class="say">Pasa y sal, no te quedes mirando el pase.</li>
+      <li class="say">En el zigzag, toque corto y cabeza arriba.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Material</div><div class="v"><p>Por circuito: 1 escalera, 1 pica, 5 chinos (1 de salida y 4 de zigzag), 2 vallas, 2 aros, 1 miniportería y 2 balones.</p></div></div>
+    <div class="row"><div class="k">Variante</div><div class="v"><p>Si con dos vallas el carril queda corto, poner las cuatro en un solo circuito y en el otro sustituir ese tramo por zigzag entre chinos.</p></div></div>
+    <div class="row"><div class="k">Organización</div><div class="v"><p>Dos circuitos idénticos de 7, con dos balones en marcha en cada uno: el segundo jugador sale cuando el primero llega a la pica. En todo momento hay 2 en recorrido, 2 de apoyo, 1 en el carril y 2 en la fila.</p></div></div>
+  </div>
+</section>
+
+<section class="blk" data-scene="cuadros">
+  <div class="hd"><div class="clock">18:30</div><h2>Dos cuadros con transferencia</h2><div class="dur">20 min</div></div>
+  <p class="kind">Posesión</p>
+
+  <div class="stage">
+    <svg viewBox="0 0 400 450" role="img" aria-label="Dos cuadros separados por un pasillo, con cinco atacantes fijos en cada uno y tres defensores en el cuadro del balón. Tras cuatro pases se abre al comodín exterior, que traslada el balón al otro cuadro mientras los tres defensores cruzan.">
+      <rect x="80" y="50" width="240" height="150" rx="3" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <rect x="80" y="260" width="240" height="150" rx="3" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <g fill="var(--att)">
+        <circle cx="115" cy="80" r="11"/><circle cx="210" cy="70" r="11"/><circle cx="295" cy="96" r="11"/>
+        <circle cx="262" cy="136" r="11"/><circle cx="125" cy="128" r="11"/>
+        <circle cx="120" cy="300" r="11"/><circle cx="195" cy="286" r="11"/><circle cx="300" cy="300" r="11"/>
+        <circle cx="250" cy="372" r="11"/><circle cx="150" cy="376" r="11"/>
+      </g>
+      <circle cx="362" cy="228" r="12" fill="var(--neutral)"/>
+      <g data-a="cu-d1"><circle r="11" fill="var(--def)"/></g>
+      <g data-a="cu-d2"><circle r="11" fill="var(--def)"/></g>
+      <g data-a="cu-d3"><circle r="11" fill="var(--def)"/></g>
+      <g data-a="cu-ball"><circle r="6" fill="var(--ball)" stroke="#8A6410" stroke-width="1"/></g>
+    </svg>
+  </div>
+  <div class="ctr">
+    <button data-play="cuadros">Ver la jugada</button>
+    <button class="ghost" data-reset="cuadros">Reiniciar</button>
+    <div class="key"><span><i style="background:var(--att)"></i>con balón</span><span><i style="background:var(--def)"></i>defensores</span><span><i style="background:var(--neutral)"></i>comodín</span></div>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="k">Descripción</div><div class="v"><p>Dos cuadros de 15x15 separados por un pasillo de 6 metros. Diez atacantes fijos, cinco en cada cuadro, y tres defensores que están siempre en el cuadro donde está el balón: 5v3 permanente. El jugador catorce es el comodín y está fuera de los dos cuadros. Tras cuatro pases seguidos, el equipo con balón abre al comodín y es él quien lo traslada al otro cuadro. Mientras el balón pasa por el comodín, los tres defensores cruzan.</p></div></div>
+    <div class="row"><div class="k">Objetivo</div><div class="v"><p>Replegar el bloque entero a la vez y llegar colocado al nuevo cuadro, no llegar y mirar.</p></div></div>
+    <div class="row"><div class="k">Normas</div><div class="v"><ul>
+      <li>Cuatro pases seguidos en el cuadro habilitan la apertura al comodín.</li>
+      <li>El comodín juega a dos toques, no entra a los cuadros y no puede ser presionado.</li>
+      <li>Cada atacante se queda en su cuadro, no se cambia de lado.</li>
+      <li>Al abrirse al comodín cruzan los tres defensores y no se queda ninguno.</li>
+      <li>Si los defensores roban, cambian el rol con los cinco atacantes de ese cuadro.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Puntuación</div><div class="v"><ul>
+      <li>Atacantes: transferencia completada, 1 punto. Dos transferencias seguidas sin perder el balón, 2 puntos.</li>
+      <li>Defensores: robo, 1 punto. Robo en los 5 segundos siguientes a una transferencia, 2 puntos.</li>
+      <li>Se canta en el momento, jugada a jugada, sin acumular marcador.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Consignas</div><div class="v"><ul>
+      <li class="say">Cuando el balón sale al comodín, cruzamos todos. Nadie se queda.</li>
+      <li class="say">Mientras corres, ya estás mirando a quién coges.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Material</div><div class="v"><p>Chinos para marcar los dos cuadros y el pasillo. Balones repartidos por fuera para que la pérdida no pare el juego.</p></div></div>
+    <div class="row"><div class="k">Variante</div><div class="v"><p>Media: tres toques para el equipo con balón. Difícil: dos toques. Si completan los cuatro pases sin despeinarse, subir a cinco; si no llegan nunca, bajar a tres.</p></div></div>
+    <div class="row"><div class="k">Organización</div><div class="v"><p>Dos bloques de 9 minutos con un cambio de roles en medio, para que todos defiendan y todos posean. El comodín rota cada 2 minutos.</p></div></div>
+  </div>
+</section>
+
+<section class="blk" data-scene="oleada">
+  <div class="hd"><div class="clock">18:50</div><h2>Oleada con doble transición</h2><div class="dur">20 min</div></div>
+  <p class="kind">Oleadas</p>
+
+  <div class="stage">
+    <svg viewBox="0 0 400 400" role="img" aria-label="Fase uno: el trío A ataca la portería de fútbol 7. Fase dos: en cuanto acaba la jugada el trío B saca y contraataca hacia las dos miniporterías del medio campo mientras el trío A repliega de cara al balón hasta la línea de chinos.">
+      <rect x="70" y="50" width="260" height="280" rx="3" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <rect x="170" y="40" width="60" height="10" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <path d="M112 50 L112 112 L288 112 L288 50" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <rect x="85" y="330" width="40" height="9" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <rect x="275" y="330" width="40" height="9" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <g fill="none" stroke="var(--neutral)" stroke-width="1.8">
+        <rect x="114" y="134" width="12" height="12" rx="2"/><rect x="194" y="134" width="12" height="12" rx="2"/><rect x="274" y="134" width="12" height="12" rx="2"/>
+      </g>
+      <circle cx="200" cy="72" r="12" fill="var(--neutral)"/>
+      <g data-a="ol-a1"><circle r="12" fill="var(--att)"/></g>
+      <g data-a="ol-a2"><circle r="12" fill="var(--att)"/></g>
+      <g data-a="ol-a3"><circle r="12" fill="var(--att)"/></g>
+      <g data-a="ol-b1"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="ol-b2"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="ol-b3"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="ol-ball"><circle r="6" fill="var(--ball)" stroke="#8A6410" stroke-width="1"/></g>
+    </svg>
+  </div>
+  <div class="ctr">
+    <button data-play="oleada">Ver la jugada</button>
+    <button class="ghost" data-reset="oleada">Reiniciar</button>
+    <div class="key"><span><i style="background:var(--att)"></i>trío A</span><span><i style="background:var(--def)"></i>trío B</span><span><i style="background:var(--neutral)"></i>portero y chinos</span></div>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="k">Descripción</div><div class="v"><p>Cada oleada tiene dos fases. En la primera, el trío A sale de la línea de medio campo y ataca la portería de F7 contra el trío B, con el comodín entrando a la señal del entrenador. En la segunda, en cuanto acaba la jugada, gol incluido, el trío B saca de inmediato y contraataca hacia las dos miniporterías del medio campo mientras el trío A repliega. La oleada muere ahí y entran los tríos C y D.</p></div></div>
+    <div class="row"><div class="k">Objetivo</div><div class="v"><p>Reaccionar a la pérdida justo cuando el equipo está más estirado y desordenado, que es el estado real en el que llegan los goles en contra.</p></div></div>
+    <div class="row"><div class="k">Normas</div><div class="v"><ul>
+      <li>La fase 2 arranca sin pausa. Si el balón se va fuera, el portero saca otro al instante.</li>
+      <li>Los primeros cinco metros del repliegue se hacen de cara al balón, sin darse la vuelta, hasta pasar la línea de chinos situada en la frontal del área.</li>
+      <li>Al replegar se va primero al centro, nunca a la banda.</li>
+      <li>El comodín siempre ataca, en las dos fases.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Puntuación</div><div class="v"><ul>
+      <li>Gol en la portería de F7, 2 puntos.</li>
+      <li>Gol en miniportería tras la transición, 3 puntos.</li>
+      <li>Robo limpio que evita el disparo, 1 punto.</li>
+      <li>Se canta en el momento, oleada a oleada, sin acumular marcador.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Consignas</div><div class="v"><ul>
+      <li class="say">Cuando el balón cambia de dueño, los tres primeros pasos deciden el gol.</li>
+      <li class="say">Vuelvo mirando el balón, no mirando mi portería.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Material</div><div class="v"><p>Portería de F7 con portero, 2 miniporterías en la línea de medio campo, 3 chinos en la frontal del área y balones detrás de cada portería.</p></div></div>
+    <div class="row"><div class="k">Variante</div><div class="v"><p>Límite de 8 segundos para la fase 1. Obliga a atacar rápido y deja a los atacantes aún más descolocados en el cambio.</p></div></div>
+    <div class="row"><div class="k">Organización</div><div class="v"><p>6 detrás de la portería de F7, 6 en la línea de medio campo, 1 portero y 1 comodín. Dos tríos por oleada, de 25 a 30 segundos, y descansan mientras trabaja la otra pareja. El comodín rota cada 4 oleadas.</p></div></div>
+  </div>
+</section>
+
+<section class="blk" data-scene="salida">
+  <div class="hd"><div class="clock">19:10</div><h2>Salida de balón 7v5</h2><div class="dur">15 min</div></div>
+  <p class="kind">Salida de balón</p>
+
+  <div class="stage">
+    <svg viewBox="0 0 400 430" role="img" aria-label="Portería de fútbol 7 abajo con portero y seis jugadores en 1-1-1-3-1, más un comodín en cada banda. Cinco rivales presionan en 1-3-1 y su último hombre protege las dos miniporterías del medio campo.">
+      <rect x="80" y="60" width="240" height="310" rx="3" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <rect x="170" y="370" width="60" height="9" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <rect x="102" y="52" width="40" height="8" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <rect x="258" y="52" width="40" height="8" fill="none" stroke="var(--ink-2)" stroke-width="3"/>
+      <path d="M120 330 L120 262 L280 262 L280 330" fill="none" stroke="var(--turf-line)" stroke-width="1.5"/>
+      <circle cx="200" cy="348" r="12" fill="var(--neutral)"/>
+      <g fill="var(--att)">
+        <circle cx="200" cy="262" r="12"/><circle cx="122" cy="212" r="12"/>
+        <circle cx="200" cy="214" r="12"/><circle cx="200" cy="146" r="12"/>
+      </g>
+      <g fill="var(--ball)"><circle cx="52" cy="228" r="12"/><circle cx="348" cy="228" r="12"/></g>
+      <g fill="var(--def)">
+        <circle cx="128" cy="188" r="12"/><circle cx="200" cy="176" r="12"/>
+      </g>
+      <g data-a="sa-central"><circle r="12" fill="var(--att)"/></g>
+      <g data-a="sa-carr"><circle r="12" fill="var(--att)"/></g>
+      <g data-a="sa-v1"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="sa-v2"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="sa-v3"><circle r="12" fill="var(--def)"/></g>
+      <g data-a="sa-ball"><circle r="6" fill="var(--ball)" stroke="#8A6410" stroke-width="1"/></g>
+    </svg>
+  </div>
+  <div class="ctr">
+    <button data-play="salida">Ver la jugada</button>
+    <button class="ghost" data-reset="salida">Reiniciar</button>
+    <div class="key"><span><i style="background:var(--att)"></i>salen</span><span><i style="background:var(--def)"></i>presionan</span><span><i style="background:var(--ball)"></i>comodines</span></div>
+  </div>
+
+  <div class="rows">
+    <div class="row"><div class="k">Descripción</div><div class="v"><p>Se empieza siempre con saque de puerta. Seis jugadores más el portero salen con la estructura 1-1-1-3-1 y tienen un comodín en cada banda. Cinco rivales presionan colocados en 1-3-1: su punta presiona al central, la línea de tres tapa a los carrileros y al interior, y el último hombre protege las dos miniporterías. Los que salen marcan cruzando el balón conduciendo por una de las dos miniporterías; si los que presionan roban, atacan la portería de F7.</p></div></div>
+    <div class="row"><div class="k">Objetivo</div><div class="v"><p>Salir jugado desde el portero con la estructura del partido y tres opciones claras, sin improvisar.</p></div></div>
+    <div class="row"><div class="k">Normas</div><div class="v"><ul>
+      <li>Los comodines se mueven por su banda, no entran al campo y no pueden ser presionados.</li>
+      <li>Los comodines juegan solo con el equipo que sale. Si el rival roba, ataca sin ellos.</li>
+      <li>Tres opciones al salir y ninguna más: central, carrilero, o larga al punta y subimos todos a la segunda jugada.</li>
+      <li>Si el balón sale fuera, se reinicia con saque de puerta.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Puntuación</div><div class="v"><ul>
+      <li>Salir y marcar en miniportería, 2 puntos.</li>
+      <li>Robo del equipo que presiona, 1 punto.</li>
+      <li>Robo y gol en la portería de F7, 2 puntos.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Consignas</div><div class="v"><ul>
+      <li class="say">Primero miro, y si no hay, la echo larga y subimos todos.</li>
+      <li class="say">El central abre a la banda, nunca conduce hacia dentro.</li>
+    </ul></div></div>
+    <div class="row"><div class="k">Material</div><div class="v"><p>Portería de F7 con portero, 2 miniporterías en la línea de medio campo y balones con el portero para reiniciar rápido.</p></div></div>
+    <div class="row"><div class="k">Variante</div><div class="v"><p>Prohibido el balón largo, para forzar la salida jugada y buscar al comodín de banda. Si el equipo que sale va muy sobrado, un comodín pasa a presionar con el rival y queda 6 contra 6 más un comodín.</p></div></div>
+    <div class="row"><div class="k">Organización</div><div class="v"><p>Los dos bloques de 6 intercambian el rol cada 4 minutos y los comodines rotan cada 2, para que todos salgan jugado y todos presionen.</p></div></div>
+  </div>
+</section>
+
+<section class="blk">
+  <div class="hd"><div class="clock">19:25</div><h2>Feedback</h2><div class="dur">5 min</div></div>
+  <p class="kind">Trabajo post-campo</p>
+  <div class="talk">
+    <ol>
+      <li>Lanzar una sola pregunta y dejar que la contesten ellos: <span class="say">¿qué hacemos en el momento en que perdemos el balón?</span></li>
+      <li>Recordar que el jueves se juntan las dos cosas de la semana en la estructura del partido.</li>
+      <li>Cerrar con el objetivo del sábado: <span class="say">que no nos cojan nunca en la contra después de atacar.</span></li>
+    </ol>
+  </div>
+</section>
+
+<footer>Margaritense Atlètic · Alevín · Microciclo 2, sesión 2. Fin previsto 19:30.</footer>
+
+</div>
+
+<script>
+(function(){
+  var S = {
+    duelo:{dur:9000,a:{
+      "du-a":[[0,200,48],[.30,228,318],[.35,214,344],[.40,190,330],[.62,196,232],[.78,176,150],[1,140,82]],
+      "du-b":[[0,200,392],[.30,172,122],[.35,186,96],[.40,210,110],[.68,206,248],[.82,192,170],[1,158,102]],
+      "du-ball":[[0,200,220],[.62,200,220],[.78,170,146],[1,134,86]]
+    }},
+    circuito:{dur:15000,
+      steps:[0,.15,.29,.38,.50,.67],
+      labels:["1. Escalera, sin balón","2. Coge el balón, pasa al apoyo 1 y sale","3. Recibe la devolución","4. Conduce y gira rodeando la pica","5. Zigzag con balón entre los chinos","6. Pasa al apoyo 2, recibe y finaliza"],
+      a:{
+      "ci-p":[[0,84,392],[.15,84,330],[.21,70,300],[.29,136,258],[.38,136,254],[.46,88,202],[.48,68,186],[.50,90,192],[.55,110,208],[.58,130,184],[.62,152,208],[.65,174,184],[.67,186,196],[.80,206,142],[1,192,68]],
+      "ci-ball":[[0,66,306],[.17,66,306],[.24,278,300],[.32,278,300],[.38,140,256],[.46,92,206],[.48,72,190],[.50,94,196],[.55,114,212],[.58,134,188],[.62,156,212],[.65,178,188],[.67,190,200],[.73,288,182],[.80,288,182],[.88,210,138],[1,192,60]]
+    }},
+    cuadros:{dur:11000,a:{
+      "cu-ball":[[0,115,94],[.12,210,84],[.22,295,110],[.32,262,150],[.44,125,142],[.58,350,222],[.66,350,222],[.80,195,300],[1,120,314]],
+      "cu-d1":[[0,150,160],[.48,158,170],[.60,166,198],[.90,160,330],[1,152,344]],
+      "cu-d2":[[0,210,178],[.48,214,182],[.60,218,200],[.90,214,326],[1,206,338]],
+      "cu-d3":[[0,268,166],[.48,272,176],[.60,272,200],[.90,262,330],[1,254,342]]
+    }},
+    oleada:{dur:12000,a:{
+      "ol-ball":[[0,162,310],[.22,210,250],[.42,218,190],[.52,200,58],[.60,200,74],[.70,198,150],[.86,196,220],[.94,190,252],[1,106,332]],
+      "ol-a1":[[0,150,305],[.2,160,240],[.42,172,180],[.5,175,165],[.62,170,150],[.80,166,225],[1,160,300]],
+      "ol-a2":[[0,200,312],[.2,206,246],[.42,214,186],[.5,216,170],[.62,212,152],[.80,206,230],[1,200,305]],
+      "ol-a3":[[0,252,305],[.2,250,244],[.42,246,188],[.5,244,172],[.62,240,150],[.80,240,228],[1,246,298]],
+      "ol-b1":[[0,160,210],[.3,168,190],[.5,180,140],[.62,175,160],[.8,172,210],[1,168,255]],
+      "ol-b2":[[0,208,196],[.3,212,178],[.5,210,130],[.62,206,152],[.8,202,205],[1,198,250]],
+      "ol-b3":[[0,256,212],[.3,250,192],[.5,244,140],[.62,248,162],[.8,252,212],[1,256,258]]
+    }},
+    salida:{dur:10000,a:{
+      "sa-ball":[[0,200,336],[.14,200,296],[.30,278,224],[.46,344,224],[.62,286,180],[.80,284,110],[1,278,62]],
+      "sa-central":[[0,200,308],[.14,200,306],[.30,196,300],[1,192,282]],
+      "sa-carr":[[0,278,212],[.30,278,212],[.46,282,196],[.62,288,178],[.80,286,112],[1,280,66]],
+      "sa-v1":[[0,176,288],[.14,188,296],[.30,210,286],[1,230,264]],
+      "sa-v2":[[0,272,188],[.30,274,196],[.50,290,196],[.80,292,140],[1,290,100]],
+      "sa-v3":[[0,200,106],[.70,214,104],[1,252,86]]
+    }}
+  };
+
+  function at(keys,p){
+    if(p<=keys[0][0]) return [keys[0][1],keys[0][2]];
+    for(var i=1;i<keys.length;i++){
+      if(p<=keys[i][0]){
+        var a=keys[i-1],b=keys[i],span=b[0]-a[0],u=span>0?(p-a[0])/span:1;
+        u=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
+        return [a[1]+(b[1]-a[1])*u, a[2]+(b[2]-a[2])*u];
+      }
+    }
+    var l=keys[keys.length-1];return [l[1],l[2]];
+  }
+  function draw(name,p){
+    var sc=S[name], root=document.querySelector('[data-scene="'+name+'"]');
+    if(!root) return;
+    for(var id in sc.a){
+      var el=root.querySelector('[data-a="'+id+'"]');
+      if(!el) continue;
+      var pt=at(sc.a[id],p);
+      el.setAttribute('transform','translate('+pt[0].toFixed(1)+','+pt[1].toFixed(1)+')');
+    }
+    if(sc.steps){
+      var lb=root.querySelector('[data-lbl]');
+      if(lb){var s=0;for(var j=0;j<sc.steps.length;j++){if(p>=sc.steps[j])s=j;}lb.textContent=sc.labels[s];}
+    }
+  }
+  var running={};
+  function stop(name){
+    if(running[name]){cancelAnimationFrame(running[name].raf);delete running[name];}
+    var b=document.querySelector('[data-play="'+name+'"]');
+    if(b) b.textContent=(name==='circuito'?'Ver el recorrido':'Ver la jugada');
+  }
+  function play(name){
+    var sc=S[name];
+    if(running[name]){stop(name);return;}
+    var btn=document.querySelector('[data-play="'+name+'"]');
+    if(btn) btn.textContent='Pausar';
+    var t0=performance.now();
+    running[name]={raf:0};
+    function step(now){
+      var p=(now-t0)/sc.dur;
+      if(p>=1){draw(name,1);stop(name);return;}
+      draw(name,p);
+      running[name].raf=requestAnimationFrame(step);
+    }
+    running[name].raf=requestAnimationFrame(step);
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('button');
+    if(!t) return;
+    if(t.dataset.play) play(t.dataset.play);
+    if(t.dataset.reset){stop(t.dataset.reset);draw(t.dataset.reset,0);}
+  });
+  for(var n in S) draw(n,0);
+})();
+</script>
